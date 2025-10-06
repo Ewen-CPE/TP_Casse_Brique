@@ -5,7 +5,6 @@ Ewen LE COGUIEC, ZALTENI chloé
 3ETI
 06/10/2025
 Que reste-t-il à faire ?
-faire afficher le score et les vies 
 """
 
 # Bibliothèques importés
@@ -37,12 +36,12 @@ class Interface_Graphique:
         self.__window_affichage = self.__window.mainloop()
     def lancement_jeu(self):
         self.__Menu.destroy()
-        self.__zone_de_jeu = Canvas(self.__window,width=850,height=490,borderwidth=1).pack(pady=30)
-        self.__bandeau = Frame(self.__window,height=300)
+        self.__bandeau = Frame(self.__window,width=860,height=30,background="black")
         self.__Menu_pack_propagate = self.__bandeau.pack_propagate(False)
-        self.__score_affichage = Label(self.__bandeau,text="Score : "+str(self.__score),fg="white").pack(side="left", padx=5)
-        self.__vies_affichage = Label(self.__bandeau,text="Vies : "+str(self.__vies),fg="white").pack(side="right",padx=5)
+        self.__score_affichage = Label(self.__bandeau,text="Score : "+str(self.__score),fg="white",background="black",font=("Courrier",20)).pack(side="left", padx=5)
+        self.__vies_affichage = Label(self.__bandeau,text="Vies : "+str(self.__vies),fg="white",background="black",font=("Courrier",20)).pack(side="right",padx=5)
         self.__bandeau_affichage = self.__bandeau.pack()
+        self.__zone_de_jeu = Canvas(self.__window,width=850,height=490,background="black").pack()
        
 
 
