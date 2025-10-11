@@ -10,7 +10,6 @@ Que reste-t-il à faire ?
 # Bibliothèques importés
 from tkinter import Tk,Label,Frame,Button,Canvas
 
-
 class Interface_Graphique:
     def __init__(self):
         self.__window = Tk()
@@ -42,11 +41,9 @@ class Interface_Graphique:
         self.__vies_affichage = Label(self.__bandeau,text="Vies : "+str(self.__vies),fg="white",background="black",font=("Courrier",20)).pack(side="right",padx=5)
         self.__bandeau.pack()
         self.__zone_de_jeu = Canvas(self.__window,width=850,height=490,background="black").pack()
+
+
+
        
 
-
-
-interface_principal=Interface_Graphique()
-
-print(interface_principal)
 
