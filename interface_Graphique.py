@@ -9,6 +9,11 @@ Que reste-t-il à faire ?
 
 # Bibliothèques importés
 from tkinter import Tk,Label,Frame,Button,Canvas
+from Logique import Logique
+from Raquette import Raquette
+from Balle import Balle
+from Brique import Brique
+
 
 class Interface_Graphique:
     def __init__(self):
@@ -27,12 +32,15 @@ class Interface_Graphique:
         self.__Bouton_Paramètre = Button(self.__Menu,text="Paramètre",fg="navy",width=8,height=2).pack(pady=6)
         
         self.__zone_jeu = None
+        self.__raquette = None
+        self.__balle = None
 
-        self.__score= 0
-        self.__vies = 3
+        self.__malogic = Logique()
+        self.__score= self.__malogic.get_score()
+        self.__vies = self.__malogic.get_vies()
         self.__bandeau = None
 
-        self.__window_affichage = self.__window.mainloop()
+        self.__window.mainloop()
     def lancement_jeu(self):
         self.__Menu.destroy()
         self.__bandeau = Frame(self.__window,width=860,height=30,background="black")
@@ -43,23 +51,14 @@ class Interface_Graphique:
         self.zone_de_jeu()
     def zone_de_jeu(self):
         self.__zone_jeu = Canvas(self.__window,width=850,height=490,background="black")
-        #self.__zone_jeu.create_rectangle(390,460,390+70,460+10,fill="red")
-        self.__zone_jeu.create_oval(200,200,200+20,200+20,fill = "blue")
-        x0=10
-        y0=3
-        longueur=100
-        largeur=30
-        espacement=22
-        for k in range(1,6):
-            for i in range(1,8):
-                self.__zone_jeu.create_rectangle(x0,y0,x0+longueur,y0+largeur,fill="red")
-                x0+=longueur+espacement
-            x0=10
-            y0+=largeur+10
+        self.__raquette = Raquette(self.__zone_jeu)
+        self.__raquette.create_raquette()
+        self.__balle = Balle(self.__zone_jeu)
+        self.__balle.create_balle()
+        Brique(self.__zone_jeu).create_Briques()
         self.__zone_jeu.pack()
-        return self.__zone_jeu
-
-
-       
-
-
+        self.update()
+    def update(self):
+        self.__raquette.mouv_raquette()
+        self.__balle.mouv_balle()
+        self.__zone_jeu.after(20,self.update)
