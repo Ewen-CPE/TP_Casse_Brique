@@ -18,8 +18,7 @@ from Raquette import  Raquette
 
 interface_principal = Interface_Graphique()
 print(interface_principal)
+zone_jeu = interface_principal.zone_de_jeu
 
-"""
-raquette = Raquette()
-print(raquette.create_raquette)
-"""
+raquette = Raquette(zone_jeu)
+print(raquette.create_raquette())

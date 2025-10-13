@@ -42,9 +42,22 @@ class Interface_Graphique:
         self.__bandeau.pack()
         self.zone_de_jeu()
     def zone_de_jeu(self):
-        self.__zone_jeu = Canvas(self.__window,width=850,height=490,background="white")
-        self.__zone_jeu.create_rectangle(100,100,100+100,100+20,fill = "red")
+        self.__zone_jeu = Canvas(self.__window,width=850,height=490,background="black")
+        #self.__zone_jeu.create_rectangle(390,460,390+70,460+10,fill="red")
+        self.__zone_jeu.create_oval(200,200,200+20,200+20,fill = "blue")
+        x0=10
+        y0=3
+        longueur=100
+        largeur=30
+        espacement=22
+        for k in range(1,6):
+            for i in range(1,8):
+                self.__zone_jeu.create_rectangle(x0,y0,x0+longueur,y0+largeur,fill="red")
+                x0+=longueur+espacement
+            x0=10
+            y0+=largeur+10
         self.__zone_jeu.pack()
+        return self.__zone_jeu
 
 
        
