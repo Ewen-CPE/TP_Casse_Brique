@@ -8,13 +8,18 @@ Que reste-t-il à faire ?
 """
 #Bibliothèques utilisées
 from Interface_Graphique import Interface_Graphique
-from Raquette import Raquette
+from Raquette import  Raquette
+
 
 
 
 
 #Programme principal
+
 interface_principal = Interface_Graphique()
 print(interface_principal)
+
+"""
 raquette = Raquette()
 print(raquette.create_raquette)
+"""

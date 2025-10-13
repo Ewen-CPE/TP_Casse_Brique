@@ -26,8 +26,8 @@ class Interface_Graphique:
         self.__Bouton_Arreter = Button(self.__Menu,text="Arrêtez",fg="red",command = quit,width=8,height=2).pack(pady=6)
         self.__Bouton_Paramètre = Button(self.__Menu,text="Paramètre",fg="navy",width=8,height=2).pack(pady=6)
         
-        self.__zone_de_jeu = None
-        
+        self.__zone_jeu = None
+
         self.__score= 0
         self.__vies = 3
         self.__bandeau = None
@@ -40,8 +40,11 @@ class Interface_Graphique:
         self.__score_affichage = Label(self.__bandeau,text="Score : "+str(self.__score),fg="white",background="black",font=("Courrier",20)).pack(side="left", padx=5)
         self.__vies_affichage = Label(self.__bandeau,text="Vies : "+str(self.__vies),fg="white",background="black",font=("Courrier",20)).pack(side="right",padx=5)
         self.__bandeau.pack()
-        self.__zone_de_jeu = Canvas(self.__window,width=850,height=490,background="black").pack()
-
+        self.zone_de_jeu()
+    def zone_de_jeu(self):
+        self.__zone_jeu = Canvas(self.__window,width=850,height=490,background="white")
+        self.__zone_jeu.create_rectangle(100,100,100+100,100+20,fill = "red")
+        self.__zone_jeu.pack()
 
 
        
