@@ -40,3 +40,12 @@ class Raquette:
         self.__zone_jeu.focus_set()
         self.__zone_jeu.bind('<Key>',self.clavier)
         self.__zone_jeu.pack()
+    def get_position_x(self):
+        return self.__position_x
+    def get_position_y(self):
+        return self.__position_départ_y
+    def get_taille_x(self):
+        return self.__taille_x
+    def get_taille_y(self):
+        return self.__taille_y
+
