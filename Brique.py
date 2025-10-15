@@ -24,8 +24,8 @@ class Brique:
         self.__brique = None
     def create_Briques(self):
         indice = 0
-        for k in range(1,6):
-            for i in range(1,8):
+        for _ in range(1,6):
+            for _ in range(1,8):
                 self.__brique = self.__zone_jeu.create_rectangle(self.__position_départ_x,self.__position_départ_y,self.__position_départ_x+self.__taille_x,self.__position_départ_y+self.__taille_y,fill = self.__liste_couleur[rd.randint(0,6)])
                 self.__liste_brique.append([indice,self.__position_départ_x,self.__position_départ_y,self.__brique])
                 indice += 1
@@ -53,3 +53,8 @@ class Brique:
     def destruct_brique(self,numero):
         self.__zone_jeu.delete(self.__liste_brique[numero][3])
         self.__liste_brique.remove(self.__liste_brique[numero])
+        self.maj_indice()
+        print(self.__liste_brique)
+    def maj_indice(self):
+        for k in range(len(self.__liste_brique)):
+            self.__liste_brique[k][0] = k

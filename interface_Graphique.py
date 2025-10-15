@@ -73,18 +73,15 @@ class Interface_Graphique:
             elif ((self.__balle.get_position_x() + self.__balle.get_diametre()) >= self.__raquette.get_position_x()) and ((self.__balle.get_position_x() + self.__balle.get_diametre()) <= (self.__raquette.get_position_x() + self.__raquette.get_taille_x())) :
                 self.__balle.add_vitesse_y(-self.__balle.get_vitesse_y())
     def colision_briques(self):
-        destruction = 0
-        indice = 0
         for k in range(self.__briques.get_taille_liste()):
+            print(self.__briques.get_position_y(k))
             if (self.__balle.get_position_y() <= (self.__briques.get_position_y(k) + self.__briques.get_taille_y())):
                 if (self.__balle.get_position_x() >= self.__briques.get_position_x(k)) and (self.__balle.get_position_x() <= (self.__briques.get_position_x(k) + self.__briques.get_taille_x())):
                     self.__balle.add_vitesse_y(-self.__balle.get_vitesse_y())
-                    destruction = 1
-                    indice = k
+                    self.__briques.destruct_brique(k)
+                    break
                 elif ((self.__balle.get_position_x() + self.__balle.get_diametre()) >= self.__briques.get_position_x(k)) and ((self.__balle.get_position_x() + self.__balle.get_diametre()) <= (self.__briques.get_position_x(k) + self.__briques.get_taille_x())):
                     self.__balle.add_vitesse_y(-self.__balle.get_vitesse_y())
-                    destruction = 1
-                    indice = k
-        if destruction == 1:
-            self.__briques.destruct_brique(indice)
+                    self.__briques.destruct_brique(k)
+                    break
             
