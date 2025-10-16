@@ -68,6 +68,7 @@ class Interface_Graphique:
         self.__balle.mouv_balle()
         self.colision_raquette()
         self.colision_briques()
+        self.perdre_vie()
         self.maj_info()
         self.__zone_jeu.after(20,self.update,)
         
@@ -133,9 +134,20 @@ class Interface_Graphique:
                     self.__briques.destruct_brique(k)
                     break
             """
+    def perdre_vie(self):
+        if (self.__balle.get_position_y() + self.__balle.get_diametre()) >= (self.__raquette.get_position_y() + 2*self.__raquette.get_taille_y()):
+            self.__balle.add_vitesse_y(-self.__balle.get_vitesse_y())
+            self.__malogic.add_vies()
+    
     def maj_info(self):
         self.__score = self.__malogic.get_score()
+        self.__vies = self.__malogic.get_vies()
+
         self.__score_affichage.pack_forget()
-        self.__score_affichage = Label(self.__bandeau,text="Score : "+str(self.__score),fg="white",background="black",font=("Courrier",20))
+        self.__vies_affichage.pack_forget()
+
+        self.__score_affichage = Label(self.__bandeau,text="Score : " + str(self.__score),fg="white",background="black",font=("Courrier",20))
+        self.__vies_affichage = Label(self.__bandeau,text="Vies : "+str(self.__vies),fg="white",background="black",font=("Courrier",20))
+
         self.__score_affichage.pack(side="left", padx=5)
-        self.__vies_affichage
+        self.__vies_affichage.pack(side="right",padx=5)

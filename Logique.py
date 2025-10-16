@@ -17,3 +17,5 @@ class Logique:
         return self.__vies
     def add_score(self):
         self.__score += 10
+    def add_vies(self):
+        self.__vies -= 1
