@@ -30,7 +30,7 @@ class Brique:
                 self.__liste_brique.append([indice,self.__position_départ_x,self.__position_départ_y,self.__brique])
                 indice += 1
                 self.__position_départ_x += self.__taille_x + self.__espacement_x
-            self.__position_départ_x =10
+            self.__position_départ_x = 10
             self.__position_départ_y += self.__taille_y + self.__espacement_y
 
             
@@ -54,7 +54,6 @@ class Brique:
         self.__zone_jeu.delete(self.__liste_brique[numero][3])
         self.__liste_brique.remove(self.__liste_brique[numero])
         self.maj_indice()
-        print(self.__liste_brique)
     def maj_indice(self):
         for k in range(len(self.__liste_brique)):
             self.__liste_brique[k][0] = k

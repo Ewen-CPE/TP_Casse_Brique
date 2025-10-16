@@ -39,15 +39,18 @@ class Interface_Graphique:
         self.__malogic = Logique()
         self.__score= self.__malogic.get_score()
         self.__vies = self.__malogic.get_vies()
+        self.__score_affichage = None
         self.__bandeau = None
 
         self.__window.mainloop()
     def lancement_jeu(self):
         self.__Menu.destroy()
         self.__bandeau = Frame(self.__window,width=860,height=30,background="black")
-        self.__Menu_pack_propagate = self.__bandeau.pack_propagate(False)
-        self.__score_affichage = Label(self.__bandeau,text="Score : "+str(self.__score),fg="white",background="black",font=("Courrier",20)).pack(side="left", padx=5)
-        self.__vies_affichage = Label(self.__bandeau,text="Vies : "+str(self.__vies),fg="white",background="black",font=("Courrier",20)).pack(side="right",padx=5)
+        self.__bandeau.pack_propagate(False)
+        self.__score_affichage = Label(self.__bandeau,text="Score : "+str(self.__score),fg="white",background="black",font=("Courrier",20))
+        self.__score_affichage.pack(side="left", padx=5)
+        self.__vies_affichage = Label(self.__bandeau,text="Vies : "+str(self.__vies),fg="white",background="black",font=("Courrier",20))
+        self.__vies_affichage.pack(side="right",padx=5)
         self.__bandeau.pack()
         self.zone_de_jeu()
     def zone_de_jeu(self):
@@ -65,7 +68,9 @@ class Interface_Graphique:
         self.__balle.mouv_balle()
         self.colision_raquette()
         self.colision_briques()
-        self.__zone_jeu.after(20,self.update)
+        self.maj_info()
+        self.__zone_jeu.after(20,self.update,)
+        
     def colision_raquette(self):
         if (self.__balle.get_position_y() + self.__balle.get_diametre()) >= self.__raquette.get_position_y() :
             if (self.__balle.get_position_x() >= self.__raquette.get_position_x()) and (self.__balle.get_position_x() <= (self.__raquette.get_position_x() + self.__raquette.get_taille_x())) :
@@ -74,14 +79,63 @@ class Interface_Graphique:
                 self.__balle.add_vitesse_y(-self.__balle.get_vitesse_y())
     def colision_briques(self):
         for k in range(self.__briques.get_taille_liste()):
-            print(self.__briques.get_position_y(k))
-            if (self.__balle.get_position_y() <= (self.__briques.get_position_y(k) + self.__briques.get_taille_y())):
+        
+            if (self.__balle.get_position_y() <= (self.__briques.get_position_y(k) + self.__briques.get_taille_y())) and (self.__balle.get_position_y() >= (self.__briques.get_position_y(k) + 0.75*self.__briques.get_taille_y())): #colision bas brique
                 if (self.__balle.get_position_x() >= self.__briques.get_position_x(k)) and (self.__balle.get_position_x() <= (self.__briques.get_position_x(k) + self.__briques.get_taille_x())):
                     self.__balle.add_vitesse_y(-self.__balle.get_vitesse_y())
                     self.__briques.destruct_brique(k)
+                    self.__malogic.add_score()
                     break
                 elif ((self.__balle.get_position_x() + self.__balle.get_diametre()) >= self.__briques.get_position_x(k)) and ((self.__balle.get_position_x() + self.__balle.get_diametre()) <= (self.__briques.get_position_x(k) + self.__briques.get_taille_x())):
                     self.__balle.add_vitesse_y(-self.__balle.get_vitesse_y())
                     self.__briques.destruct_brique(k)
+                    self.__malogic.add_score()
                     break
-            
+            if ((self.__balle.get_position_y() + self.__balle.get_diametre()) >= self.__briques.get_position_y(k)) and ((self.__balle.get_position_y() + self.__balle.get_diametre()) <= (self.__briques.get_position_y(k) + 0.25*self.__briques.get_taille_y())): # colision haut brique (attention éventuelle problème)
+                if (self.__balle.get_position_x() >= self.__briques.get_position_x(k)) and (self.__balle.get_position_x() <= (self.__briques.get_position_x(k) + self.__briques.get_taille_x())):
+                    self.__balle.add_vitesse_y(-self.__balle.get_vitesse_y())
+                    self.__briques.destruct_brique(k)
+                    self.__malogic.add_score()
+                    break
+                elif ((self.__balle.get_position_x() + self.__balle.get_diametre()) >= self.__briques.get_position_x(k)) and ((self.__balle.get_position_x() + self.__balle.get_diametre()) <= (self.__briques.get_position_x(k) + self.__briques.get_taille_x())):
+                    self.__balle.add_vitesse_y(-self.__balle.get_vitesse_y())
+                    self.__briques.destruct_brique(k)
+                    self.__malogic.add_score()
+                    break
+            if(self.__balle.get_position_y() <= (self.__briques.get_position_y(k) + self.__briques.get_taille_y())) and (self.__balle.get_position_y() >= self.__briques.get_position_y(k)): # colision côté brique
+                if (self.__balle.get_position_x() <= (self.__briques.get_position_x(k) + self.__briques.get_taille_x())) and ((self.__balle.get_position_x() + self.__balle.get_diametre()) >= (self.__briques.get_position_x(k) + self.__briques.get_taille_x())):
+                    self.__balle.add_vitesse_x(-self.__balle.get_vitesse_x())
+                    self.__briques.destruct_brique(k)
+                    self.__malogic.add_score()
+                    break
+                elif ((self.__balle.get_position_x() + self.__balle.get_diametre()) >= self.__briques.get_position_x(k)) and (self.__balle.get_position_x() <= self.__briques.get_position_x(k)):
+                    self.__balle.add_vitesse_x(-self.__balle.get_vitesse_x())
+                    self.__briques.destruct_brique(k)
+                    self.__malogic.add_score()
+                    break
+            """
+            if (self.__balle.get_position_x() <= (self.__briques.get_position_x(k) + self.__briques.get_taille_x())) and (self.__balle.get_position_x() >= (self.__briques.get_position_x(k))):
+                if (self.__balle.get_position_y() >= self.__briques.get_position_y(k)) and (self.__balle.get_position_y() <= (self.__briques.get_position_y(k) + self.__briques.get_taille_y())):
+                    self.__balle.add_vitesse_x(-self.__balle.get_vitesse_x())
+                    self.__briques.destruct_brique(k)
+                    break
+                elif ((self.__balle.get_position_y() + self.__balle.get_diametre()) >= self.__briques.get_position_y(k)) and((self.__balle.get_position_y() + self.__balle.get_diametre()) <= (self.__briques.get_position_y(k) + self.__briques.get_taille_y())):
+                    self.__balle.add_vitesse_x(-self.__balle.get_vitesse_x())
+                    self.__briques.destruct_brique(k)
+                    break
+            elif ((self.__balle.get_position_x() + self.__balle.get_diametre()) >= self.__briques.get_position_x(k)) and ((self.__balle.get_position_x() + self.__balle.get_diametre()) >= (self.__briques.get_position_x(k) + self.__briques.get_taille_x())):
+                if (self.__balle.get_position_y() >= self.__briques.get_position_y(k)) and (self.__balle.get_position_y() <= (self.__briques.get_position_y(k) + self.__briques.get_taille_y())):
+                    self.__balle.add_vitesse_x(-self.__balle.get_vitesse_x())
+                    self.__briques.destruct_brique(k)
+                    break
+                elif ((self.__balle.get_position_y() + self.__balle.get_diametre()) >= self.__briques.get_position_y(k)) and ((self.__balle.get_position_y() + self.__balle.get_diametre()) <= (self.__briques.get_position_y(k) + self.__briques.get_taille_y())):
+                    self.__balle.add_vitesse_x(-self.__balle.get_vitesse_x())
+                    self.__briques.destruct_brique(k)
+                    break
+            """
+    def maj_info(self):
+        self.__score = self.__malogic.get_score()
+        self.__score_affichage.pack_forget()
+        self.__score_affichage = Label(self.__bandeau,text="Score : "+str(self.__score),fg="white",background="black",font=("Courrier",20))
+        self.__score_affichage.pack(side="left", padx=5)
+        self.__vies_affichage

@@ -17,8 +17,8 @@ class Balle:
         self.__diametre = 20
         self.__couleur = "blue"
         self.__position = [self.__position_départ_x,self.__position_départ_y]
-        self.__vitesse_x = 2
-        self.__vitesse_y = 3
+        self.__vitesse_x = 3
+        self.__vitesse_y = 4
         
         
     def create_balle(self):
@@ -44,6 +44,8 @@ class Balle:
         return self.__vitesse_y
     def add_vitesse_y(self,vitesse_y):
         self.__vitesse_y = vitesse_y
+    def add_vitesse_x(self,vitesse_x):
+        self.__vitesse_x = vitesse_x
         
 
 
