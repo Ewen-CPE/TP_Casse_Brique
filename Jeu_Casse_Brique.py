@@ -15,7 +15,6 @@ from Raquette import  Raquette
 
 
 #Programme principal
-
-interface_principal = Interface_Graphique()
-print(interface_principal)
+jeu = Interface_Graphique()
+print(jeu)
 
