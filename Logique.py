@@ -7,8 +7,8 @@ Ewen LE COGUIEC, ZALTENI chloé
 """
 
 class Logique:
-    def __init__(self): # initialisation de ma classe
-        self.__score= 0 #score du joueur au début du jeu
+    def __init__(self): # initialisation de la classe
+        self.__score = 0 #score du joueur au début du jeu
         self.__vies = 3 #vies du joueurs au début du jeu
 
 #Implémentation de différents niveau de jeu avec le système d'une file
@@ -18,7 +18,7 @@ class Logique:
         self.__niveau = [self.__niveau1, self.__niveau2, self.__niveau3] #file qui contient tous les niveaux de jeu
 
     def initialisation(self): # initialisation du score et des vies du joueur à chaque fois que le joueur relance le jeu
-        self.__score= 0
+        self.__score = 0
         self.__vies = 3
     
     def meilleur_score(self,perf): # remplacement des meilleurs scores si la performance du joueur est supérieur au meilleur score précedént
@@ -56,15 +56,19 @@ class Logique:
 # "guetteur" de la classe logique pour accéder au score, aux vies et au niveau
     def get_score(self):
         return self.__score
+    
     def get_vies(self):
         return self.__vies
+    
     def get_niveau(self):
-        return self.__niveau[0] # premier élément car les niveux sont une file
+        return self.__niveau[0] # premier élément car les niveaux sont compris dans une file
 
 # Fonctions pour changer le score, les vies et le niveau  
     def add_score(self):
         self.__score += 10 # Chaque brique cassée rapporte 10 points
+
     def add_vies(self):
         self.__vies -= 1 # Chaque fois que la balle touche le sol on perd une vie 
+
     def remove_niveau(self):
         self.__niveau.pop(0) # Lorsqu'un niveau est réussie et que le joueur continue de jouer on enlève le niveau réussi pour passer au suivant
