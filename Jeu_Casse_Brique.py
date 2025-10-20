@@ -11,6 +11,6 @@ from Interface_Graphique import Interface_Graphique
 
 #Programme principal
 
-jeu = Interface_Graphique() #initialisation de la classe interface graphique
-print(jeu)
+Interface_Graphique() #initialisation de la classe interface graphique
+
 

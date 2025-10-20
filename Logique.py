@@ -29,7 +29,7 @@ class Logique:
 
         for j in range(len(lignes)):
             lignes[j]=lignes[j].split(" ")[0] # séparation du score et du retour à la ligne (\n)
-
+        
         if perf > int(lignes[0]): #vérification si la performance du joueur peut remplacer le meilleur score
 
             #implémentation du meilleur score dans notre pile
