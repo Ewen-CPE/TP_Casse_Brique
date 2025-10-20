@@ -4,11 +4,10 @@ But : Jeu casse brique
 Ewen LE COGUIEC, ZALTENI chloé
 3ETI
 06/10/2025
-Que reste-t-il à faire ?
 """
 
 class Balle:
-    def __init__(self,zone_jeu,niveau):
+    def __init__(self,zone_jeu,niveau,couleur):
         '''initialisation de la classe'''
 
         self.__zone_jeu = zone_jeu #argument de la zone de jeu à paramétrer lors de l'utilisation de la classe
@@ -18,7 +17,7 @@ class Balle:
         self.__position_départ_x = 430
         self.__position_départ_y = 250
         self.__diametre = 20
-        self.__couleur = "blue"
+        self.__couleur = couleur
         self.__position = [self.__position_départ_x,self.__position_départ_y]
 
         self.__vitesse_x = 2 *self.__niveau # Mise en place de la vitesse "x" en fonction du niveau
@@ -65,9 +64,10 @@ class Balle:
     # Modification de la vitesse "x" et de la vitesse "y"
     def add_vitesse_y(self,vitesse_y):
         self.__vitesse_y = vitesse_y
-        
+
     def add_vitesse_x(self,vitesse_x):
         self.__vitesse_x = vitesse_x
+    
         
 
 

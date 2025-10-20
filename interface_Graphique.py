@@ -4,11 +4,10 @@ But : Jeu casse brique
 Ewen LE COGUIEC, ZALTENI chloé
 3ETI
 06/10/2025
-Que reste-t-il à faire ?
 """
 
 # Bibliothèques importés
-from tkinter import Tk,Label,Frame,Button,Canvas
+from tkinter import Tk,Label,Frame,Button,Canvas,PhotoImage
 from Logique import Logique
 from Raquette import Raquette
 from Balle import Balle
@@ -35,7 +34,7 @@ class Interface_Graphique:
         # mise en place des boutons dans le menu
         self.__Bouton_Démarrez = Button(self.__Menu,text="Démarrez",fg="green",command = self.lancement_jeu,width=8,height=2).pack(pady=8) # Bouton pour lancer le jeu casse brique
         self.__Bouton_Arreter = Button(self.__Menu,text="Arrêtez",fg="red",command = quit,width=8,height=2).pack(pady=6) # Bouton pour quitter le menu du jeu
-        self.__Bouton_Paramètre = Button(self.__Menu,text="Paramètre",fg="navy",width=8,height=2).pack(pady=6) # bouton pour accéder aux paramètres du jeu
+        self.__Bouton_Paramètre = Button(self.__Menu,text="Paramètre",fg="navy",command = self.parametre,width=8,height=2).pack(pady=6) # bouton pour accéder aux paramètres du jeu
         
 
         #initialisation des différentes données utiles dans la mise en place du jeu
@@ -47,6 +46,8 @@ class Interface_Graphique:
         self.__score_affichage = None 
         self.__vies_affichage = None
         self.__bandeau = None # bandeau qui contient le score et la vie du joueur
+        self.__Menu_parametre = None
+        self.__couleur_balle = None
 
         self.__malogic = Logique() # initialisation de la classe qui initialise les données du jeu
 
@@ -54,8 +55,49 @@ class Interface_Graphique:
         self.__score = self.__malogic.get_score() 
         self.__vies = self.__malogic.get_vies()
 
+        self.__background = PhotoImage(file="background_plaine.png")
 
         self.__window.mainloop()
+    
+    def parametre(self):
+
+        self.__Menu.destroy()
+
+        # initialisation du menu paramètre
+        self.__Menu_parametre = Frame(self.__window,background="#FFFFFF",relief="raised",width=450,height=350)
+        self.__Menu_parametre.pack_propagate(False) #fonction pour désactiver la redimension automatique du Frame
+        Label(self.__Menu_parametre,text="Paramètre",width=20,height=3).pack(pady=25)
+        self.__Menu_parametre.pack(pady=100) # Ajoute un espacement vertical de 100 pixels
+
+        Button(self.__Menu_parametre,text="Balle rouge",fg="red",command = self.couleur_rouge,width=8,height=2).pack(pady=2,padx=2)
+        Button(self.__Menu_parametre,text="Balle rose",fg="pink",command = self.couleur_rose,width=8,height=2).pack(pady=2,padx=8)
+        Button(self.__Menu_parametre,text="Balle orange",fg="orange",command = self.couleur_orange,width=8,height=2).pack(pady=2,padx=8)
+        Button(self.__Menu_parametre,text="Balle vert",fg="green",command = self.couleur_vert,width=8,height=2).pack(pady=2,padx=8)
+
+
+    # Fonction qui permette de changer la couleur de la balle
+    def couleur_rouge(self):
+        self.__couleur_balle = "red"
+        self.__Menu_parametre.destroy()
+        self.lancement_jeu()
+
+    def couleur_rose(self):
+        self.__couleur_balle = "pink"
+        self.__Menu_parametre.destroy()
+        self.lancement_jeu()
+
+    def couleur_orange(self):
+        self.__couleur_balle = "orange"
+        self.__Menu_parametre.destroy()
+        self.lancement_jeu()
+
+    def couleur_vert(self):
+        self.__couleur_balle = "green"
+        self.__Menu_parametre.destroy()
+        self.lancement_jeu()
+
+
+
 
     def lancement_jeu(self): 
         '''intialisation du jeu après que l'utilisateur ait cliqué sur démarrer'''
@@ -78,12 +120,17 @@ class Interface_Graphique:
 
     def zone_de_jeu(self): 
         '''initialisation de la zone de jeu'''
-        self.__zone_jeu = Canvas(self.__window,width=850,height=490,background="black")
+        self.__zone_jeu = Canvas(self.__window,width = 850,height = 490)
+
+        self.__zone_jeu.create_image(0,0,image = self.__background, anchor="nw")
 
         self.__raquette = Raquette(self.__zone_jeu)
         self.__raquette.create_raquette() #création de la raquette pour le joueur
 
-        self.__balle = Balle(self.__zone_jeu,self.__malogic.get_niveau())
+        if self.__couleur_balle == None :
+            self.__couleur_balle = "white"
+
+        self.__balle = Balle(self.__zone_jeu,self.__malogic.get_niveau(),self.__couleur_balle)
         self.__balle.create_balle() #création de la balle pour le jeu
 
         self.__briques = Brique(self.__zone_jeu)

@@ -4,7 +4,6 @@ But : Jeu casse brique
 Ewen LE COGUIEC, ZALTENI chloé
 3ETI
 06/10/2025
-Que reste-t-il à faire ?
 """
 from tkinter import Tk,Label,Frame,Button,Canvas
 import random as rd
