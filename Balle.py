@@ -10,16 +10,20 @@ from tkinter import Tk,Label,Frame,Button,Canvas
 
 
 class Balle:
-    def __init__(self,zone_jeu,niveau):
-        self.__zone_jeu = zone_jeu
-        self.__niveau = niveau
+    def __init__(self,zone_jeu,niveau): # initialisation de la classe
+
+        self.__zone_jeu = zone_jeu #argument de la zone de jeu à paramétrer lors de l'utilisation de la classe
+        self.__niveau = niveau #argument du niveau à paramétrer lors de l'utilisation de la classe
+        
+        #caractéristique de la balle
         self.__position_départ_x = 430
         self.__position_départ_y = 250
         self.__diametre = 20
         self.__couleur = "blue"
         self.__position = [self.__position_départ_x,self.__position_départ_y]
-        self.__vitesse_x = 2 *self.__niveau
-        self.__vitesse_y = 3 *self.__niveau
+
+        self.__vitesse_x = 2 *self.__niveau # Mise en place de la vitesse "x" en fonction du niveau
+        self.__vitesse_y = 3 *self.__niveau # Mise en place de la vitesse "y" en fonction du niveau
         
         
     def create_balle(self):
