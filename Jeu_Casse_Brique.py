@@ -5,12 +5,12 @@ Ewen LE COGUIEC, ZALTENI chloé
 3ETI
 06/10/2025
 """
-#Bibliothèques utilisées
+#Bibliothèque utilisée
 from Interface_Graphique import Interface_Graphique
 
 
 #Programme principal
 
-Interface_Graphique() #initialisation de la classe interface graphique
+Interface_Graphique() # Lancement du jeu
 
 
