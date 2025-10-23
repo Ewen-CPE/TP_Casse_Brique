@@ -28,13 +28,19 @@ class Interface_Graphique:
         # initialisation du menu d'accueil
         self.__Menu = Frame(self.__window,background="#FFFFFF",relief="raised",width=450,height=350)
         self.__Menu.pack_propagate(False) #fonction pour désactiver la redimension automatique du Frame
-        self.__Menu_Label = Label(self.__Menu,text="Menu du Jeu",width=20,height=5).pack(pady=30)
-        self.__Menu.pack(pady=100) # Ajoute un espacement vertical de 100 pixels
+        self.__Menu_Label = Label(self.__Menu,text="Menu du Jeu",background="#FFFFFF",font=("Californian FB",20)).pack(pady=30)
+
 
         # mise en place des boutons dans le menu
-        self.__Bouton_Démarrez = Button(self.__Menu,text="Démarrez",fg="green",command = self.lancement_jeu,width=8,height=2).pack(pady=8) # Bouton pour lancer le jeu casse brique
-        self.__Bouton_Arreter = Button(self.__Menu,text="Arrêtez",fg="red",command = quit,width=8,height=2).pack(pady=6) # Bouton pour quitter le menu du jeu
-        self.__Bouton_Paramètre = Button(self.__Menu,text="Paramètre",fg="navy",command = self.parametre,width=8,height=2).pack(pady=6) # bouton pour accéder aux paramètres du jeu
+        self.__Bouton_Démarrez = Button(self.__Menu,text="Démarrez",fg="green",command = self.lancement_jeu,font=("Arial",10),width=15,height=2).pack(pady=4) # Bouton pour lancer le jeu casse brique
+        self.__Bouton_Arreter = Button(self.__Menu,text="Arrêtez",fg="red",command = quit,font=("Arial",10),width=15,height=2).pack(pady=6) # Bouton pour quitter le menu du jeu
+        self.__Bouton_Paramètre = Button(self.__Menu,text="Paramètre",fg="navy",command = self.parametre,font=("Arial",10),width=15,height=2).pack(pady=6) # bouton pour accéder aux paramètres du jeu
+
+        self.__malogic = Logique() # initialisation de la classe qui initialise les données du jeu
+
+        self.__Meilleur_score_Label = Label(self.__Menu,text = "Meilleur score : " + str(self.__malogic.get_meilleur_score()),fg = "#FF2301" ,background = "#FFFFFF",font = ("Californian FB",16)).pack(pady=5)
+
+        self.__Menu.pack(pady=100) # Ajoute un espacement vertical de 100 pixels
         
 
         #initialisation des différentes données utiles dans la mise en place du jeu
@@ -49,7 +55,6 @@ class Interface_Graphique:
         self.__Menu_parametre = None
         self.__couleur_balle = None
 
-        self.__malogic = Logique() # initialisation de la classe qui initialise les données du jeu
 
         #récupération des informations types "logique"
         self.__score = self.__malogic.get_score() 
@@ -253,12 +258,14 @@ class Interface_Graphique:
             # mise en place du menu de fin pour les perdants
             self.__Menu_fin = Frame(self.__window,background="#FFFFFF",relief="raised",width=450,height=350)
             self.__Menu_fin.pack_propagate(False)
-            Label(self.__Menu_fin,text="Défaite",width=20,height=5).pack(pady=30)
-            # bouton pour rejouer au jeu ou arréter
-            Button(self.__Menu_fin,text="Rejouer",fg="green",command = self.rejouer,width=8,height=2).pack(pady=6)
-            Button(self.__Menu_fin,text="Arrêtez",fg="red",command = quit,width=8,height=2).pack(pady=6)
+            Label(self.__Menu_fin,text="Défaite",background="#FFFFFF",font=("Californian FB",25)).pack(pady=30)
 
             self.__malogic.meilleur_score(self.__score) # renvoie du score du joueur pour l'afficher ou pas dans les meilleurs scores
+
+            # bouton pour rejouer au jeu ou arréter
+            Button(self.__Menu_fin,text="Rejouer",fg="green",command = self.rejouer,font=("Arial",10),width=15,height=2).pack(pady=6)
+            Button(self.__Menu_fin,text="Arrêtez",fg="red",command = quit,font=("Arial",10),width=15,height=2).pack(pady=6)
+
 
             self.__Menu_fin.pack(pady=100)
 
@@ -270,9 +277,9 @@ class Interface_Graphique:
             # mise en place du menu de fin pour les gagnants
             self.__Menu_fin = Frame(self.__window,background="#FFFFFF",relief="raised",width=450,height=350)
             self.__Menu_fin.pack_propagate(False)
-            Label(self.__Menu_fin,text="Victoire",width=20,height=5).pack(pady=30)
-            Button(self.__Menu_fin,text="Continuez",fg="green",command = self.continuer,width=8,height=2).pack(pady=6)
-            Button(self.__Menu_fin,text="Arrêtez",fg="red",command = quit,width=8,height=2).pack(pady=6)
+            Label(self.__Menu_fin,text="Victoire",background="#FFFFFF",font=("Californian FB",25)).pack(pady=30)
+            Button(self.__Menu_fin,text="Continuez",fg="green",command = self.continuer,font=("Arial",10),width=15,height=2).pack(pady=6)
+            Button(self.__Menu_fin,text="Arrêtez",fg="red",command = quit,font=("Arial",10),width=15,height=2).pack(pady=6)
 
 
             self.__Menu_fin.pack(pady=100)
@@ -285,9 +292,9 @@ class Interface_Graphique:
             # mise en place du menu de fin pour les gagnants
             self.__Menu_fin = Frame(self.__window,background="#FFFFFF",relief="raised",width=450,height=350)
             self.__Menu_fin.pack_propagate(False)
-            Label(self.__Menu_fin,text="Victoire",width=20,height=5).pack(pady=30)
-            Button(self.__Menu_fin,text="Continuez",fg="green",command = self.continuer,width=8,height=2).pack(pady=6)
-            Button(self.__Menu_fin,text="Arrêtez",fg="red",command = quit,width=8,height=2).pack(pady=6)
+            Label(self.__Menu_fin,text="Victoire",background="#FFFFFF",font=("Californian FB",25)).pack(pady=30)
+            Button(self.__Menu_fin,text="Continuez",fg="green",command = self.continuer,font=("Arial",10),width=15,height=2).pack(pady=6)
+            Button(self.__Menu_fin,text="Arrêtez",fg="red",command = quit,font=("Arial",10),width=15,height=2).pack(pady=6)
 
             self.__Menu_fin.pack(pady=100)
         
@@ -299,8 +306,8 @@ class Interface_Graphique:
             # mise en place du menu de fin pour les gagnants
             self.__Menu_fin = Frame(self.__window,background="#FFFFFF",relief="raised",width=450,height=350)
             self.__Menu_fin.pack_propagate(False)
-            Label(self.__Menu_fin,text="Victoire",width=20,height=5).pack(pady=30)
-            Button(self.__Menu_fin,text="Arrêtez",fg="red",command = quit,width=8,height=2).pack(pady=6)
+            Label(self.__Menu_fin,text="Victoire",background="#FFFFFF",font=("Californian FB",25)).pack(pady=30)
+            Button(self.__Menu_fin,text="Arrêtez",fg="red",command = quit,font=("Arial",10),width=15,height=2).pack(pady=6)
 
             self.__malogic.meilleur_score(self.__score) # renvoie du score du joueur pour l'afficher ou pas dans les meilleurs scores
 

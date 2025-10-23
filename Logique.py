@@ -27,29 +27,20 @@ class Logique:
         #Données du meilleur score sous forme de pile
 
         for j in range(len(lignes)):
-            lignes[j]=lignes[j].split(" ")[0] # séparation du score et du retour à la ligne (\n)
-        
-        if perf > int(lignes[0]): #vérification si la performance du joueur peut remplacer le meilleur score
+            lignes[2-j]=lignes[j].split(" ")[0] # séparation du score et du retour à la ligne (\n)
+        print(lignes)
+        if perf > int(lignes[2]): #vérification si la performance du joueur peut remplacer le meilleur score
 
             #implémentation du meilleur score dans notre pile
-            lignes[2] = lignes[1]
-            lignes[1] = lignes[0]
-            lignes[0] = perf
+            lignes.append(perf)
+            print(lignes)
 
-        elif perf > int(lignes[1]): #vérification si la performance du joueur peut remplacer le deuxième meilleur score
-
-            #implémentation du meilleur score dans notre pile
-            lignes[2] = lignes[1]
-            lignes[1] = perf
-
-        elif perf > int(lignes[2]): #vérification si la performance du joueur peut remplacer le troisième meilleur score
-
-            #implémentation du meilleur score dans notre pile
-            lignes[2] = perf
+        if len(lignes) == 4:
+            lignes.pop(0)
 
         with open("score.txt","w") as score_ecrit:
             for k in range(3):
-                score_ecrit.write(str(lignes[k]) + " \n") #écriture des nouveaux meilleurs scores dans le fichier score.txt
+                score_ecrit.write(str(lignes[2-k]) + " \n") #écriture des nouveaux meilleurs scores dans le fichier score.txt
 
 
 # "guetteur" de la classe logique pour accéder au score, aux vies et au niveau
@@ -64,6 +55,14 @@ class Logique:
     
     def get_taille_liste_niveau(self):
         return len(self.__niveau)
+    
+    def get_meilleur_score(self):
+        with open("score.txt","r") as score_lu:
+            score = score_lu.readlines() #lecture du fichier texte score.txt et extraction du contenue des lignes
+
+        for i in range(len(score)):
+            score[i] = score[i].split(" ")[0] # séparation du score et du retour à la ligne (\n)
+        return score[0]
 
 # Fonctions pour changer le score, les vies et le niveau  
     def add_score(self):
