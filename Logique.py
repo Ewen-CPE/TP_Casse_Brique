@@ -17,10 +17,10 @@ class Logique:
         self.__niveau3 = 2 #coefficient multiplicateur de la vitesse de la balle
         self.__niveau = [self.__niveau1, self.__niveau2, self.__niveau3] #file qui contient tous les niveaux de jeu
 
-    def initialisation(self): # initialisation du score et des vies du joueur à chaque fois que le joueur relance le jeu
+    def initialisation(self): # initialisation des vies du joueur à chaque fois que le joueur relance le jeu
         self.__vies = 3
     
-    def meilleur_score(self,perf): # remplacement des meilleurs scores si la performance du joueur est supérieur au meilleur score précedént
+    def meilleur_score(self,perf): # remplacement du meilleurs score si la performance du joueur est supérieur au meilleur score précedént
         with open("score.txt","r") as score_lu:
             lignes = score_lu.readlines() #lecture du fichier texte score.txt et extraction du contenue des lignes
         
@@ -28,19 +28,18 @@ class Logique:
 
         for j in range(len(lignes)):
             lignes[2-j]=lignes[j].split(" ")[0] # séparation du score et du retour à la ligne (\n)
-        print(lignes)
+
         if perf > int(lignes[2]): #vérification si la performance du joueur peut remplacer le meilleur score
 
             #implémentation du meilleur score dans notre pile
             lignes.append(perf)
-            print(lignes)
 
         if len(lignes) == 4:
             lignes.pop(0)
 
         with open("score.txt","w") as score_ecrit:
             for k in range(3):
-                score_ecrit.write(str(lignes[2-k]) + " \n") #écriture des nouveaux meilleurs scores dans le fichier score.txt
+                score_ecrit.write(str(lignes[2-k]) + " \n") #écriture des 3 derniers meilleurs scores dans le fichier score.txt
 
 
 # "guetteur" de la classe logique pour accéder au score, aux vies et au niveau

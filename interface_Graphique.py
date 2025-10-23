@@ -23,24 +23,24 @@ class Interface_Graphique:
         self.__window = Tk()
         self.__window_title = self.__window.title("Casse Brique")
         self.__window_geometry = self.__window.geometry("860x520")
-        self.__window_config = self.__window.config(background="#000000")
+        self.__window_config = self.__window.config(background = "#000000")
 
         # initialisation du menu d'accueil
-        self.__Menu = Frame(self.__window,background="#FFFFFF",relief="raised",width=450,height=350)
+        self.__Menu = Frame(self.__window, background = "#FFFFFF", relief = "raised", width = 450, height = 350)
         self.__Menu.pack_propagate(False) #fonction pour désactiver la redimension automatique du Frame
-        self.__Menu_Label = Label(self.__Menu,text="Menu du Jeu",background="#FFFFFF",font=("Californian FB",20)).pack(pady=30)
+        self.__Menu_Label = Label(self.__Menu, text = "Menu du Jeu", background = "#FFFFFF", font = ("Californian FB",20)).pack(pady = 30)
 
 
         # mise en place des boutons dans le menu
-        self.__Bouton_Démarrez = Button(self.__Menu,text="Démarrez",fg="green",command = self.lancement_jeu,font=("Arial",10),width=15,height=2).pack(pady=4) # Bouton pour lancer le jeu casse brique
-        self.__Bouton_Arreter = Button(self.__Menu,text="Arrêtez",fg="red",command = quit,font=("Arial",10),width=15,height=2).pack(pady=6) # Bouton pour quitter le menu du jeu
-        self.__Bouton_Paramètre = Button(self.__Menu,text="Paramètre",fg="navy",command = self.parametre,font=("Arial",10),width=15,height=2).pack(pady=6) # bouton pour accéder aux paramètres du jeu
+        self.__Bouton_Démarrez = Button(self.__Menu, text = "Démarrez", fg = "green", command = self.lancement_jeu, font = ("Arial",10), width = 15, height = 2).pack(pady = 4) # Bouton pour lancer le jeu casse brique
+        self.__Bouton_Arreter = Button(self.__Menu, text = "Arrêtez", fg = "red", command = quit, font = ("Arial",10), width = 15, height = 2).pack(pady = 6) # Bouton pour quitter le menu du jeu
+        self.__Bouton_Paramètre = Button(self.__Menu, text = "Paramètre", fg = "navy", command = self.parametre, font = ("Arial",10), width = 15, height = 2).pack(pady = 6) # bouton pour accéder aux paramètres du jeu
 
         self.__malogic = Logique() # initialisation de la classe qui initialise les données du jeu
 
-        self.__Meilleur_score_Label = Label(self.__Menu,text = "Meilleur score : " + str(self.__malogic.get_meilleur_score()),fg = "#FF2301" ,background = "#FFFFFF",font = ("Californian FB",16)).pack(pady=5)
+        self.__Meilleur_score_Label = Label(self.__Menu, text = "Meilleur score : " + str(self.__malogic.get_meilleur_score()), fg = "#FF2301" , background = "#FFFFFF", font = ("Californian FB",16)).pack(pady = 5) # affichage du meilleur score
 
-        self.__Menu.pack(pady=100) # Ajoute un espacement vertical de 100 pixels
+        self.__Menu.pack(pady = 100) # Ajoute un espacement vertical de 100 pixels lors de l'affichage du menu
         
 
         #initialisation des différentes données utiles dans la mise en place du jeu
@@ -52,17 +52,18 @@ class Interface_Graphique:
         self.__score_affichage = None 
         self.__vies_affichage = None
         self.__bandeau = None # bandeau qui contient le score et la vie du joueur
-        self.__Menu_parametre = None
-        self.__couleur_balle = None
+        self.__Menu_parametre = None # Menu des paramètres du jeu
+        self.__couleur_balle = None # couleur de la balle
 
 
         #récupération des informations types "logique"
-        self.__score = self.__malogic.get_score() 
-        self.__vies = self.__malogic.get_vies()
+        self.__score = self.__malogic.get_score() #score du joueur
+        self.__vies = self.__malogic.get_vies() # vies du joueur
 
-        self.__background_plaine = PhotoImage(file="background_plaine.png")
-        self.__background_glace = PhotoImage(file="background_glace.png")
-        self.__background_enfer = PhotoImage(file="background_enfer.png")
+        # Arrière plan des différents niveaux
+        self.__background_plaine = PhotoImage(file = "background_plaine.png")
+        self.__background_glace = PhotoImage(file = "background_glace.png")
+        self.__background_enfer = PhotoImage(file = "background_enfer.png")
 
         self.__window.mainloop()
     
@@ -71,15 +72,16 @@ class Interface_Graphique:
         self.__Menu.destroy()
 
         # initialisation du menu paramètre
-        self.__Menu_parametre = Frame(self.__window,background="#FFFFFF",relief="raised",width=450,height=350)
+        self.__Menu_parametre = Frame(self.__window, background = "#FFFFFF", relief = "raised", width = 450, height = 350)
         self.__Menu_parametre.pack_propagate(False) #fonction pour désactiver la redimension automatique du Frame
-        Label(self.__Menu_parametre,text="Paramètre",width=20,height=3).pack(pady=25)
-        self.__Menu_parametre.pack(pady=100) # Ajoute un espacement vertical de 100 pixels
+        Label(self.__Menu_parametre, text = "Paramètre", width = 20, height = 3).pack(pady = 25)
+        self.__Menu_parametre.pack(pady = 100) # Ajoute un espacement vertical de 100 pixels pour le menu paramètre
 
-        Button(self.__Menu_parametre,text="Balle rouge",fg="red",command = self.couleur_rouge,width=8,height=2).pack(pady=2,padx=2)
-        Button(self.__Menu_parametre,text="Balle rose",fg="pink",command = self.couleur_rose,width=8,height=2).pack(pady=2,padx=8)
-        Button(self.__Menu_parametre,text="Balle orange",fg="orange",command = self.couleur_orange,width=8,height=2).pack(pady=2,padx=8)
-        Button(self.__Menu_parametre,text="Balle vert",fg="green",command = self.couleur_vert,width=8,height=2).pack(pady=2,padx=8)
+        # Boutons des différentes couleurs disponibles pour la balle
+        Button(self.__Menu_parametre, text = "Balle rouge", fg = "red", command = self.couleur_rouge, width = 8, height = 2).pack(pady = 2)
+        Button(self.__Menu_parametre, text = "Balle rose", fg = "pink", command = self.couleur_rose, width = 8, height = 2).pack(pady = 2)
+        Button(self.__Menu_parametre, text = "Balle orange", fg = "orange", command = self.couleur_orange, width = 8, height = 2).pack(pady = 2)
+        Button(self.__Menu_parametre, text = "Balle vert", fg = "green", command = self.couleur_vert, width = 8, height = 2).pack(pady = 2)
 
 
     # Fonction qui permette de changer la couleur de la balle
@@ -113,12 +115,12 @@ class Interface_Graphique:
         self.__malogic.initialisation()
 
         #mise en place du bandeau avec le score et la vie
-        self.__bandeau = Frame(self.__window,width=860,height=30,background="black")
+        self.__bandeau = Frame(self.__window, width = 860, height = 30, background = "black")
         self.__bandeau.pack_propagate(False) #fonction pour désactiver la redimension automatique du Frame
-        self.__score_affichage = Label(self.__bandeau,text="Score : "+str(self.__score),fg="white",background="black",font=("Courrier",20))
-        self.__score_affichage.pack(side="left", padx=5)
-        self.__vies_affichage = Label(self.__bandeau,text="Vies : "+str(self.__vies),fg="white",background="black",font=("Courrier",20))
-        self.__vies_affichage.pack(side="right",padx=5)
+        self.__score_affichage = Label(self.__bandeau, text = "Score : " + str(self.__score), fg = "white", background = "black", font = ("Courrier",20))
+        self.__score_affichage.pack(side = "left", padx = 5)
+        self.__vies_affichage = Label(self.__bandeau, text = "Vies : " + str(self.__vies), fg = "white", background = "black", font = ("Courrier",20))
+        self.__vies_affichage.pack(side = "right", padx = 5)
         self.__bandeau.pack()
 
         self.maj_info()
@@ -127,21 +129,24 @@ class Interface_Graphique:
 
     def zone_de_jeu(self): 
         '''initialisation de la zone de jeu'''
-        self.__zone_jeu = Canvas(self.__window,width = 850,height = 490)
+        self.__zone_jeu = Canvas(self.__window, width = 850, height = 490) # Création du canevas de la zone de jeu
+
         if self.__malogic.get_taille_liste_niveau() == 3:
-            self.__zone_jeu.create_image(0,0,image = self.__background_plaine, anchor="nw")
+            self.__zone_jeu.create_image(0, 0, image = self.__background_plaine, anchor="nw") # affichage de l'arrière plan Niveau 1
+
         elif self.__malogic.get_taille_liste_niveau() == 2:
-            self.__zone_jeu.create_image(0,0,image = self.__background_glace, anchor="nw")
+            self.__zone_jeu.create_image(0, 0, image = self.__background_glace, anchor="nw") # affichage de l'arrière plan Niveau 2
+
         elif self.__malogic.get_taille_liste_niveau() == 1:
-            self.__zone_jeu.create_image(0,0,image = self.__background_enfer, anchor="nw")
+            self.__zone_jeu.create_image(0, 0, image = self.__background_enfer, anchor="nw") # affichage de l'arrière plan Niveau 3
 
         self.__raquette = Raquette(self.__zone_jeu)
         self.__raquette.create_raquette() #création de la raquette pour le joueur
 
         if self.__couleur_balle == None :
-            self.__couleur_balle = "white"
+            self.__couleur_balle = "white" # couleur par défault de la balle si aucne couleur n'a été choisi dans les paramètres
 
-        self.__balle = Balle(self.__zone_jeu,self.__malogic.get_niveau(),self.__couleur_balle)
+        self.__balle = Balle(self.__zone_jeu, self.__malogic.get_niveau(), self.__couleur_balle)
         self.__balle.create_balle() #création de la balle pour le jeu
 
         self.__briques = Brique(self.__zone_jeu)
@@ -240,10 +245,10 @@ class Interface_Graphique:
         self.__vies_affichage.pack_forget()
 
         #affichage du nouveau score et de la vie du joueur
-        self.__score_affichage = Label(self.__bandeau,text="Score : " + str(self.__score),fg="white",background="black",font=("Courrier",20))
-        self.__vies_affichage = Label(self.__bandeau,text="Vies : "+str(self.__vies),fg="white",background="black",font=("Courrier",20))
-        self.__score_affichage.pack(side="left", padx=5)
-        self.__vies_affichage.pack(side="right",padx=5)
+        self.__score_affichage = Label(self.__bandeau, text = "Score : " + str(self.__score), fg = "white", background = "black", font = ("Courrier",20))
+        self.__vies_affichage = Label(self.__bandeau, text = "Vies : " + str(self.__vies), fg = "white", background = "black", font = ("Courrier",20))
+        self.__score_affichage.pack(side = "left", padx = 5)
+        self.__vies_affichage.pack(side = "right", padx =5)
 
         self.reset()
     
@@ -256,18 +261,18 @@ class Interface_Graphique:
             self.__zone_jeu.destroy()
 
             # mise en place du menu de fin pour les perdants
-            self.__Menu_fin = Frame(self.__window,background="#FFFFFF",relief="raised",width=450,height=350)
+            self.__Menu_fin = Frame(self.__window, background = "#FFFFFF", relief = "raised", width = 450, height = 350)
             self.__Menu_fin.pack_propagate(False)
-            Label(self.__Menu_fin,text="Défaite",background="#FFFFFF",font=("Californian FB",25)).pack(pady=30)
+            Label(self.__Menu_fin, text = "Défaite", background = "#FFFFFF", font = ("Californian FB",25)).pack(pady = 30)
 
             self.__malogic.meilleur_score(self.__score) # renvoie du score du joueur pour l'afficher ou pas dans les meilleurs scores
 
-            # bouton pour rejouer au jeu ou arréter
-            Button(self.__Menu_fin,text="Rejouer",fg="green",command = self.rejouer,font=("Arial",10),width=15,height=2).pack(pady=6)
-            Button(self.__Menu_fin,text="Arrêtez",fg="red",command = quit,font=("Arial",10),width=15,height=2).pack(pady=6)
+            # boutons pour rejouer au jeu ou arréter
+            Button(self.__Menu_fin, text = "Rejouer", fg = "green", command = self.rejouer, font = ("Arial",10), width = 15, height = 2).pack(pady = 6)
+            Button(self.__Menu_fin, text = "Arrêtez", fg = "red", command = quit, font = ("Arial",10), width = 15, height = 2).pack(pady = 6)
 
 
-            self.__Menu_fin.pack(pady=100)
+            self.__Menu_fin.pack(pady = 100)
 
         elif self.__score == 350 and self.__malogic.get_taille_liste_niveau() == 3 : # condition si le joueur casse toutes les briques (gagner)
 
@@ -275,14 +280,15 @@ class Interface_Graphique:
             self.__zone_jeu.destroy()
 
             # mise en place du menu de fin pour les gagnants
-            self.__Menu_fin = Frame(self.__window,background="#FFFFFF",relief="raised",width=450,height=350)
+            self.__Menu_fin = Frame(self.__window,background = "#FFFFFF", relief = "raised", width = 450, height = 350)
             self.__Menu_fin.pack_propagate(False)
-            Label(self.__Menu_fin,text="Victoire",background="#FFFFFF",font=("Californian FB",25)).pack(pady=30)
-            Button(self.__Menu_fin,text="Continuez",fg="green",command = self.continuer,font=("Arial",10),width=15,height=2).pack(pady=6)
-            Button(self.__Menu_fin,text="Arrêtez",fg="red",command = quit,font=("Arial",10),width=15,height=2).pack(pady=6)
+            Label(self.__Menu_fin, text = "Victoire", background = "#FFFFFF", font = ("Californian FB",25)).pack(pady = 30)
 
+            # boutons pour continuer le jeu ou arrêter
+            Button(self.__Menu_fin, text = "Continuez", fg = "green", command = self.continuer, font = ("Arial",10), width = 15, height = 2).pack(pady = 6)
+            Button(self.__Menu_fin, text = "Arrêtez", fg = "red", command = quit, font = ("Arial",10), width = 15, height = 2).pack(pady = 6)
 
-            self.__Menu_fin.pack(pady=100)
+            self.__Menu_fin.pack(pady = 100)
         
         elif self.__score == 700 and self.__malogic.get_taille_liste_niveau() == 2 : # condition si le joueur casse toutes les briques (gagner)
 
@@ -290,13 +296,15 @@ class Interface_Graphique:
             self.__zone_jeu.destroy()
 
             # mise en place du menu de fin pour les gagnants
-            self.__Menu_fin = Frame(self.__window,background="#FFFFFF",relief="raised",width=450,height=350)
+            self.__Menu_fin = Frame(self.__window, background = "#FFFFFF", relief = "raised", width = 450, height = 350)
             self.__Menu_fin.pack_propagate(False)
-            Label(self.__Menu_fin,text="Victoire",background="#FFFFFF",font=("Californian FB",25)).pack(pady=30)
-            Button(self.__Menu_fin,text="Continuez",fg="green",command = self.continuer,font=("Arial",10),width=15,height=2).pack(pady=6)
-            Button(self.__Menu_fin,text="Arrêtez",fg="red",command = quit,font=("Arial",10),width=15,height=2).pack(pady=6)
+            Label(self.__Menu_fin, text = "Victoire", background = "#FFFFFF", font = ("Californian FB",25)).pack(pady = 30)
 
-            self.__Menu_fin.pack(pady=100)
+            # boutons pour continuer le jeu ou arrêter
+            Button(self.__Menu_fin, text = "Continuez", fg = "green", command = self.continuer, font = ("Arial",10), width = 15, height = 2).pack(pady = 6)
+            Button(self.__Menu_fin, text = "Arrêtez", fg = "red", command = quit, font = ("Arial",10), width = 15, height = 2).pack(pady = 6)
+
+            self.__Menu_fin.pack(pady = 100)
         
         elif self.__score == 1050 and self.__malogic.get_taille_liste_niveau() == 1 : # condition si le joueur casse toutes les briques (gagner)
 
@@ -304,14 +312,17 @@ class Interface_Graphique:
             self.__zone_jeu.destroy()
 
             # mise en place du menu de fin pour les gagnants
-            self.__Menu_fin = Frame(self.__window,background="#FFFFFF",relief="raised",width=450,height=350)
+            self.__Menu_fin = Frame(self.__window, background = "#FFFFFF", relief = "raised", width = 450, height = 350)
             self.__Menu_fin.pack_propagate(False)
-            Label(self.__Menu_fin,text="Victoire",background="#FFFFFF",font=("Californian FB",25)).pack(pady=30)
-            Button(self.__Menu_fin,text="Arrêtez",fg="red",command = quit,font=("Arial",10),width=15,height=2).pack(pady=6)
+            Label(self.__Menu_fin, text = "Victoire", background = "#FFFFFF", font = ("Californian FB",25)).pack(pady = 30)
 
             self.__malogic.meilleur_score(self.__score) # renvoie du score du joueur pour l'afficher ou pas dans les meilleurs scores
 
-            self.__Menu_fin.pack(pady=100)
+
+            # boutons pour arrêter
+            Button(self.__Menu_fin, text = "Arrêtez", fg = "red", command = quit, font = ("Arial",10), width = 15, height = 2).pack(pady = 6)
+
+            self.__Menu_fin.pack(pady = 100)
 
     
     def rejouer(self): 
