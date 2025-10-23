@@ -55,7 +55,9 @@ class Interface_Graphique:
         self.__score = self.__malogic.get_score() 
         self.__vies = self.__malogic.get_vies()
 
-        self.__background = PhotoImage(file="background_plaine.png")
+        self.__background_plaine = PhotoImage(file="background_plaine.png")
+        self.__background_glace = PhotoImage(file="background_glace.png")
+        self.__background_enfer = PhotoImage(file="background_enfer.png")
 
         self.__window.mainloop()
     
@@ -121,8 +123,12 @@ class Interface_Graphique:
     def zone_de_jeu(self): 
         '''initialisation de la zone de jeu'''
         self.__zone_jeu = Canvas(self.__window,width = 850,height = 490)
-
-        self.__zone_jeu.create_image(0,0,image = self.__background, anchor="nw")
+        if self.__malogic.get_taille_liste_niveau() == 3:
+            self.__zone_jeu.create_image(0,0,image = self.__background_plaine, anchor="nw")
+        elif self.__malogic.get_taille_liste_niveau() == 2:
+            self.__zone_jeu.create_image(0,0,image = self.__background_glace, anchor="nw")
+        elif self.__malogic.get_taille_liste_niveau() == 1:
+            self.__zone_jeu.create_image(0,0,image = self.__background_enfer, anchor="nw")
 
         self.__raquette = Raquette(self.__zone_jeu)
         self.__raquette.create_raquette() #création de la raquette pour le joueur
@@ -256,7 +262,7 @@ class Interface_Graphique:
 
             self.__Menu_fin.pack(pady=100)
 
-        elif self.__score == 350 : # condition si le joueur casse toutes les briques (gagner)
+        elif self.__score == 350 and self.__malogic.get_taille_liste_niveau() == 3 : # condition si le joueur casse toutes les briques (gagner)
 
             self.__bandeau.destroy()
             self.__zone_jeu.destroy()
@@ -268,6 +274,35 @@ class Interface_Graphique:
             Button(self.__Menu_fin,text="Continuez",fg="green",command = self.continuer,width=8,height=2).pack(pady=6)
             Button(self.__Menu_fin,text="Arrêtez",fg="red",command = quit,width=8,height=2).pack(pady=6)
 
+
+            self.__Menu_fin.pack(pady=100)
+        
+        elif self.__score == 700 and self.__malogic.get_taille_liste_niveau() == 2 : # condition si le joueur casse toutes les briques (gagner)
+
+            self.__bandeau.destroy()
+            self.__zone_jeu.destroy()
+
+            # mise en place du menu de fin pour les gagnants
+            self.__Menu_fin = Frame(self.__window,background="#FFFFFF",relief="raised",width=450,height=350)
+            self.__Menu_fin.pack_propagate(False)
+            Label(self.__Menu_fin,text="Victoire",width=20,height=5).pack(pady=30)
+            Button(self.__Menu_fin,text="Continuez",fg="green",command = self.continuer,width=8,height=2).pack(pady=6)
+            Button(self.__Menu_fin,text="Arrêtez",fg="red",command = quit,width=8,height=2).pack(pady=6)
+
+            self.__Menu_fin.pack(pady=100)
+        
+        elif self.__score == 1050 and self.__malogic.get_taille_liste_niveau() == 1 : # condition si le joueur casse toutes les briques (gagner)
+
+            self.__bandeau.destroy()
+            self.__zone_jeu.destroy()
+
+            # mise en place du menu de fin pour les gagnants
+            self.__Menu_fin = Frame(self.__window,background="#FFFFFF",relief="raised",width=450,height=350)
+            self.__Menu_fin.pack_propagate(False)
+            Label(self.__Menu_fin,text="Victoire",width=20,height=5).pack(pady=30)
+            Button(self.__Menu_fin,text="Arrêtez",fg="red",command = quit,width=8,height=2).pack(pady=6)
+
+            self.__malogic.meilleur_score(self.__score) # renvoie du score du joueur pour l'afficher ou pas dans les meilleurs scores
 
             self.__Menu_fin.pack(pady=100)
 

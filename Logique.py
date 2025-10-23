@@ -18,7 +18,6 @@ class Logique:
         self.__niveau = [self.__niveau1, self.__niveau2, self.__niveau3] #file qui contient tous les niveaux de jeu
 
     def initialisation(self): # initialisation du score et des vies du joueur à chaque fois que le joueur relance le jeu
-        self.__score = 0
         self.__vies = 3
     
     def meilleur_score(self,perf): # remplacement des meilleurs scores si la performance du joueur est supérieur au meilleur score précedént
@@ -62,6 +61,9 @@ class Logique:
     
     def get_niveau(self):
         return self.__niveau[0] # premier élément car les niveaux sont compris dans une file
+    
+    def get_taille_liste_niveau(self):
+        return len(self.__niveau)
 
 # Fonctions pour changer le score, les vies et le niveau  
     def add_score(self):
