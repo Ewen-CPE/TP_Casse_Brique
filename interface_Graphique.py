@@ -230,7 +230,7 @@ class Interface_Graphique:
 
         if (self.__balle.get_position_y() + self.__balle.get_diametre()) >= (self.__raquette.get_position_y() + 2*self.__raquette.get_taille_y()): # condition si la coordonnée "y" bas de la balle passe dessous de deux fois la taille "y" de la raquette
             self.__balle.add_vitesse_y(-self.__balle.get_vitesse_y())
-            self.__malogic.add_vies() # retirement d'un point de vie au joueur
+            self.__malogic.add_vies() # retrait d'un point de vie au joueur
             self.maj_info() # modification des informations affichés
     
     def maj_info(self): 
