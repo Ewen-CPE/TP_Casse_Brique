@@ -42,7 +42,7 @@ class Logique:
                 score_ecrit.write(str(lignes[2-k]) + " \n") #écriture des 3 derniers meilleurs scores dans le fichier score.txt
 
 
-# "guetteur" de la classe logique pour accéder au score, aux vies et au niveau
+# "guetteur" de la classe logique pour accéder aux scores, aux vies et au niveau
     def get_score(self):
         return self.__score
     
