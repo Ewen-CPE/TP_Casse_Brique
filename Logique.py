@@ -22,12 +22,12 @@ class Logique:
     
     def meilleur_score(self,perf): # remplacement du meilleurs score si la performance du joueur est supérieur au meilleur score précedént
         with open("score.txt","r") as score_lu:
-            lignes = score_lu.readlines() #lecture du fichier texte score.txt et extraction du contenue des lignes
-        
+            lignes_doc = score_lu.readlines() #lecture du fichier texte score.txt et extraction du contenue des lignes
+        lignes=['0', '0', '0']
         #Données du meilleur score sous forme de pile
 
-        for j in range(len(lignes)):
-            lignes[2-j]=lignes[j].split(" ")[0] # séparation du score et du retour à la ligne (\n)
+        for j in range(len(lignes_doc)):
+            lignes[2-j]=lignes_doc[j].split(" ")[0] # séparation du score et du retour à la ligne (\n)
 
         if perf > int(lignes[2]): #vérification si la performance du joueur peut remplacer le meilleur score
 
