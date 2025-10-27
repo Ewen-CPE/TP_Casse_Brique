@@ -8,13 +8,14 @@ Readme
  
  
 Règle de notre casse brique :
--Le joueur doit faire rebondir la balle en déplaçant la raquette avec les flèches droites et gauche de son clavier dans le but de détruire toutes les briques.
+-Le joueur doit faire rebondir la balle en déplaçant la raquette avec les flèches droite et gauche de son clavier dans le but de détruire toutes les briques.
 -Le joueur possède 3 vies, il en perd une dès que la balle n’est pas rattrapée par la raquette et qu’elle la dépasse.
  
 Nos spécificités :
 -Une fois toutes les briques détruites , le joueur accède au niveau 2 puis au niveau 3 avec le même principe de jeu. Les 3 niveaux ont des fond d’écran personnalisés. 
 -A chaque niveau , la vitesse de la balle augmente : pour le niveau 2, sa vitesse initiale est multipliée par 1,5 , pour le niveau 3 elle est multipliée par 2.
--Nous avons un fichier texte qui garde les 3 meilleurs scores.
+-Notre jeu possède un menu paramètre sur lequelle on peut choisir la couleur de la balle pour le jeu.
+-Nous avons un fichier texte qui garde les 3 derniers meilleurs scores.
  
 Adresse du répertoire GIT :
 https://github.com/Ewen-CPE/TP_Casse_Brique.git
