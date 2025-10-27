@@ -1,6 +1,6 @@
 """
 utf-8
-But : Jeu casse brique
+But : Créer une classe pour la balle du jeu
 Ewen LE COGUIEC, ZALTENI chloé
 3ETI
 06/10/2025

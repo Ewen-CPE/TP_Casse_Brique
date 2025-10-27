@@ -1,13 +1,15 @@
 """
 utf-8
-But : Jeu casse brique
+But : Créer une classe pour les briques du jeu
 Ewen LE COGUIEC, ZALTENI chloé
 3ETI
 06/10/2025
 """
-from tkinter import Tk,Label,Frame,Button,Canvas
+#Bibliothèque utilisé
+
 import random as rd
 
+# Classe
 
 class Brique:
     def __init__(self,zone_jeu):
