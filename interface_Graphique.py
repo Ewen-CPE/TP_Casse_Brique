@@ -1,6 +1,6 @@
 """
 utf-8
-But : Jeu casse brique
+But : Créer l'interface graphique de tous le jeu
 Ewen LE COGUIEC, ZALTENI chloé
 3ETI
 06/10/2025
@@ -36,7 +36,7 @@ class Interface_Graphique:
         self.__Bouton_Arreter = Button(self.__Menu, text = "Arrêtez", fg = "red", command = quit, font = ("Arial",10), width = 15, height = 2).pack(pady = 6) # Bouton pour quitter le menu du jeu
         self.__Bouton_Paramètre = Button(self.__Menu, text = "Paramètre", fg = "navy", command = self.parametre, font = ("Arial",10), width = 15, height = 2).pack(pady = 6) # bouton pour accéder aux paramètres du jeu
 
-        self.__malogic = Logique() # initialisation de la classe qui initialise les données du jeu
+        self.__malogic = Logique() # initialisation de la classe qui stocke les données du jeu
 
         self.__Meilleur_score_Label = Label(self.__Menu, text = "Meilleur score : " + str(self.__malogic.get_meilleur_score()), fg = "#FF2301" , background = "#FFFFFF", font = ("Californian FB",16)).pack(pady = 5) # affichage du meilleur score
 
@@ -48,7 +48,7 @@ class Interface_Graphique:
         self.__raquette = None # raquette du joueur
         self.__balle = None # balle du jeu
         self.__briques = None # ensembles des briques du niveau de jeu
-        self.__Menu_fin =None # Menu de fin après la victoire et la défaite du joueur
+        self.__Menu_fin = None # Menu de fin après la victoire et la défaite du joueur
         self.__score_affichage = None 
         self.__vies_affichage = None
         self.__bandeau = None # bandeau qui contient le score et la vie du joueur
@@ -57,7 +57,7 @@ class Interface_Graphique:
 
 
         #récupération des informations types "logique"
-        self.__score = self.__malogic.get_score() #score du joueur
+        self.__score = self.__malogic.get_score() # score du joueur
         self.__vies = self.__malogic.get_vies() # vies du joueur
 
         # Arrière plan des différents niveaux
@@ -68,7 +68,7 @@ class Interface_Graphique:
         self.__window.mainloop()
     
     def parametre(self):
-
+        '''fonction pour l'aactivation du menu paramètre'''
         self.__Menu.destroy()
 
         # initialisation du menu paramètre
@@ -84,7 +84,7 @@ class Interface_Graphique:
         Button(self.__Menu_parametre, text = "Balle vert", fg = "green", command = self.couleur_vert, width = 8, height = 2).pack(pady = 2)
 
 
-    # Fonction qui permette de changer la couleur de la balle
+    # Fonctions qui permettent de changer la couleur de la balle
     def couleur_rouge(self):
         self.__couleur_balle = "red"
         self.__Menu_parametre.destroy()
@@ -182,13 +182,13 @@ class Interface_Graphique:
 
             # collision bas de la brique
             if (self.__balle.get_position_y() <= (self.__briques.get_position_y(k) + self.__briques.get_taille_y())) and (self.__balle.get_position_y() >= (self.__briques.get_position_y(k) + 0.75*self.__briques.get_taille_y())): # condition si la coordonnée "y" du haut de la balle est plus petite que la coordonnée "y" du bas de la brique
-                if (self.__balle.get_position_x() >= self.__briques.get_position_x(k)) and (self.__balle.get_position_x() <= (self.__briques.get_position_x(k) + self.__briques.get_taille_x())): # condition si la coordnnée "x" gauche de la balle est supérieur à la coordonnée "x" gauche de la brique et si la coordonnée "x" gauche de la balle est inférieur à la cordonnée "x" droite de la brique
+                if (self.__balle.get_position_x() >= self.__briques.get_position_x(k)) and (self.__balle.get_position_x() <= (self.__briques.get_position_x(k) + self.__briques.get_taille_x())): # condition si la coordonnée "x" gauche de la balle est supérieure à la coordonnée "x" gauche de la brique et si la coordonnée "x" gauche de la balle est inférieure à la cordonnée "x" droite de la brique
                     self.__balle.add_vitesse_y(-self.__balle.get_vitesse_y()) # inversement de la vitesse "y" de la balle
                     self.__briques.destruct_brique(k) #destruction de la brique indice k dans la liste
                     self.__malogic.add_score() # modification du score
                     self.maj_info() # modification des informations affichés
                     break
-                elif ((self.__balle.get_position_x() + self.__balle.get_diametre()) >= self.__briques.get_position_x(k)) and ((self.__balle.get_position_x() + self.__balle.get_diametre()) <= (self.__briques.get_position_x(k) + self.__briques.get_taille_x())): # condition si la coordnnée "x" droite de la balle est supérieur à la coordonnée "x" gauche de la brique et si la coordonnée "x" droite de la balle est inférieur à la cordonnée "x" droite de la brique
+                elif ((self.__balle.get_position_x() + self.__balle.get_diametre()) >= self.__briques.get_position_x(k)) and ((self.__balle.get_position_x() + self.__balle.get_diametre()) <= (self.__briques.get_position_x(k) + self.__briques.get_taille_x())): # condition si la coordnnée "x" droite de la balle est supérieure à la coordonnée "x" gauche de la brique et si la coordonnée "x" droite de la balle est inférieure à la cordonnée "x" droite de la brique
                     self.__balle.add_vitesse_y(-self.__balle.get_vitesse_y()) 
                     self.__briques.destruct_brique(k) 
                     self.__malogic.add_score() 
@@ -197,13 +197,13 @@ class Interface_Graphique:
             
             #collision du haut de la brique
             if ((self.__balle.get_position_y() + self.__balle.get_diametre()) >= self.__briques.get_position_y(k)) and ((self.__balle.get_position_y() + self.__balle.get_diametre()) <= (self.__briques.get_position_y(k) + 0.25*self.__briques.get_taille_y())): # condition si la coordonnée "y" du bas la balle est plus grande que la coordonnée "y" du haut de la brique
-                if (self.__balle.get_position_x() >= self.__briques.get_position_x(k)) and (self.__balle.get_position_x() <= (self.__briques.get_position_x(k) + self.__briques.get_taille_x())): #condition si la coordonnée "x" gauche de la balle est supérieur à la coordonnée "x" gauche de la brique et la coordonnée "x" gauche de ma balle est inférieur à la coordonnée "x" droite de la brique
+                if (self.__balle.get_position_x() >= self.__briques.get_position_x(k)) and (self.__balle.get_position_x() <= (self.__briques.get_position_x(k) + self.__briques.get_taille_x())): #condition si la coordonnée "x" gauche de la balle est supérieure à la coordonnée "x" gauche de la brique et la coordonnée "x" gauche de ma balle est inférieure à la coordonnée "x" droite de la brique
                     self.__balle.add_vitesse_y(-self.__balle.get_vitesse_y())
                     self.__briques.destruct_brique(k) 
                     self.__malogic.add_score() 
                     self.maj_info() 
                     break
-                elif ((self.__balle.get_position_x() + self.__balle.get_diametre()) >= self.__briques.get_position_x(k)) and ((self.__balle.get_position_x() + self.__balle.get_diametre()) <= (self.__briques.get_position_x(k) + self.__briques.get_taille_x())): # condition si la coordnnée "x" droite de la balle est supérieur à la coordonnée "x" gauche de la brique et si la coordonnée "x" droite de la balle est inférieur à la cordonnée "x" droite de la brique
+                elif ((self.__balle.get_position_x() + self.__balle.get_diametre()) >= self.__briques.get_position_x(k)) and ((self.__balle.get_position_x() + self.__balle.get_diametre()) <= (self.__briques.get_position_x(k) + self.__briques.get_taille_x())): # condition si la coordnnée "x" droite de la balle est supérieure à la coordonnée "x" gauche de la brique et si la coordonnée "x" droite de la balle est inférieure à la cordonnée "x" droite de la brique
                     self.__balle.add_vitesse_y(-self.__balle.get_vitesse_y())
                     self.__briques.destruct_brique(k) 
                     self.__malogic.add_score() 
@@ -211,14 +211,14 @@ class Interface_Graphique:
                     break
             
             #collision côtés de la brique
-            if(self.__balle.get_position_y() <= (self.__briques.get_position_y(k) + self.__briques.get_taille_y())) and (self.__balle.get_position_y() >= self.__briques.get_position_y(k)): # condition si la coordonné "y" du haut de la balle est supérieur à la coordonnée "y" du bas de la brique et si la coordonnée "y" du haut de la balle est inférieur à la coordonnée "y" du haut de la brique
-                if (self.__balle.get_position_x() <= (self.__briques.get_position_x(k) + self.__briques.get_taille_x())) and ((self.__balle.get_position_x() + self.__balle.get_diametre()) >= (self.__briques.get_position_x(k) + self.__briques.get_taille_x())): # condition si la coordonnée "x" gauche de la balle est inférieur à la coordonnée " x" droite de la brique
+            if(self.__balle.get_position_y() <= (self.__briques.get_position_y(k) + self.__briques.get_taille_y())) and (self.__balle.get_position_y() >= self.__briques.get_position_y(k)): # condition si la coordonné "y" du haut de la balle est supérieure à la coordonnée "y" du bas de la brique et si la coordonnée "y" du haut de la balle est inférieure à la coordonnée "y" du haut de la brique
+                if (self.__balle.get_position_x() <= (self.__briques.get_position_x(k) + self.__briques.get_taille_x())) and ((self.__balle.get_position_x() + self.__balle.get_diametre()) >= (self.__briques.get_position_x(k) + self.__briques.get_taille_x())): # condition si la coordonnée "x" gauche de la balle est inférieure à la coordonnée " x" droite de la brique
                     self.__balle.add_vitesse_x(-self.__balle.get_vitesse_x()) # inversement de la vitesse "x" de la balle
                     self.__briques.destruct_brique(k) 
                     self.__malogic.add_score() 
                     self.maj_info() 
                     break
-                elif ((self.__balle.get_position_x() + self.__balle.get_diametre()) >= self.__briques.get_position_x(k)) and (self.__balle.get_position_x() <= self.__briques.get_position_x(k)):  # condition si la coordonnée "x" droite de la balle est supérieur à la coordonnée " x" gauche de la brique
+                elif ((self.__balle.get_position_x() + self.__balle.get_diametre()) >= self.__briques.get_position_x(k)) and (self.__balle.get_position_x() <= self.__briques.get_position_x(k)):  # condition si la coordonnée "x" droite de la balle est supérieure à la coordonnée " x" gauche de la brique
                     self.__balle.add_vitesse_x(-self.__balle.get_vitesse_x()) 
                     self.__briques.destruct_brique(k) 
                     self.__malogic.add_score() 
@@ -248,7 +248,7 @@ class Interface_Graphique:
         self.__score_affichage = Label(self.__bandeau, text = "Score : " + str(self.__score), fg = "white", background = "black", font = ("Courrier",20))
         self.__vies_affichage = Label(self.__bandeau, text = "Vies : " + str(self.__vies), fg = "white", background = "black", font = ("Courrier",20))
         self.__score_affichage.pack(side = "left", padx = 5)
-        self.__vies_affichage.pack(side = "right", padx =5)
+        self.__vies_affichage.pack(side = "right", padx = 5)
 
         self.reset()
     
@@ -263,13 +263,13 @@ class Interface_Graphique:
             # mise en place du menu de fin pour les perdants
             self.__Menu_fin = Frame(self.__window, background = "#FFFFFF", relief = "raised", width = 450, height = 350)
             self.__Menu_fin.pack_propagate(False)
-            Label(self.__Menu_fin, text = "Défaite", background = "#FFFFFF", font = ("Californian FB",25)).pack(pady = 30)
+            Label(self.__Menu_fin, text = "Défaite", background = "#FFFFFF", font = ("Californian FB", 25)).pack(pady = 30)
 
             self.__malogic.meilleur_score(self.__score) # renvoie du score du joueur pour l'afficher ou pas dans les meilleurs scores
 
             # boutons pour rejouer au jeu ou arréter
-            Button(self.__Menu_fin, text = "Rejouer", fg = "green", command = self.rejouer, font = ("Arial",10), width = 15, height = 2).pack(pady = 6)
-            Button(self.__Menu_fin, text = "Arrêtez", fg = "red", command = quit, font = ("Arial",10), width = 15, height = 2).pack(pady = 6)
+            Button(self.__Menu_fin, text = "Rejouer", fg = "green", command = self.rejouer, font = ("Arial", 10), width = 15, height = 2).pack(pady = 6)
+            Button(self.__Menu_fin, text = "Arrêtez", fg = "red", command = quit, font = ("Arial", 10), width = 15, height = 2).pack(pady = 6)
 
 
             self.__Menu_fin.pack(pady = 100)
@@ -282,11 +282,11 @@ class Interface_Graphique:
             # mise en place du menu de fin pour les gagnants
             self.__Menu_fin = Frame(self.__window,background = "#FFFFFF", relief = "raised", width = 450, height = 350)
             self.__Menu_fin.pack_propagate(False)
-            Label(self.__Menu_fin, text = "Victoire", background = "#FFFFFF", font = ("Californian FB",25)).pack(pady = 30)
+            Label(self.__Menu_fin, text = "Victoire", background = "#FFFFFF", font = ("Californian FB", 25)).pack(pady = 30)
 
             # boutons pour continuer le jeu ou arrêter
-            Button(self.__Menu_fin, text = "Continuez", fg = "green", command = self.continuer, font = ("Arial",10), width = 15, height = 2).pack(pady = 6)
-            Button(self.__Menu_fin, text = "Arrêtez", fg = "red", command = quit, font = ("Arial",10), width = 15, height = 2).pack(pady = 6)
+            Button(self.__Menu_fin, text = "Continuez", fg = "green", command = self.continuer, font = ("Arial", 10), width = 15, height = 2).pack(pady = 6)
+            Button(self.__Menu_fin, text = "Arrêtez", fg = "red", command = quit, font = ("Arial", 10), width = 15, height = 2).pack(pady = 6)
 
             self.__Menu_fin.pack(pady = 100)
         
@@ -298,11 +298,11 @@ class Interface_Graphique:
             # mise en place du menu de fin pour les gagnants
             self.__Menu_fin = Frame(self.__window, background = "#FFFFFF", relief = "raised", width = 450, height = 350)
             self.__Menu_fin.pack_propagate(False)
-            Label(self.__Menu_fin, text = "Victoire", background = "#FFFFFF", font = ("Californian FB",25)).pack(pady = 30)
+            Label(self.__Menu_fin, text = "Victoire", background = "#FFFFFF", font = ("Californian FB", 25)).pack(pady = 30)
 
             # boutons pour continuer le jeu ou arrêter
-            Button(self.__Menu_fin, text = "Continuez", fg = "green", command = self.continuer, font = ("Arial",10), width = 15, height = 2).pack(pady = 6)
-            Button(self.__Menu_fin, text = "Arrêtez", fg = "red", command = quit, font = ("Arial",10), width = 15, height = 2).pack(pady = 6)
+            Button(self.__Menu_fin, text = "Continuez", fg = "green", command = self.continuer, font = ("Arial", 10), width = 15, height = 2).pack(pady = 6)
+            Button(self.__Menu_fin, text = "Arrêtez", fg = "red", command = quit, font = ("Arial", 10), width = 15, height = 2).pack(pady = 6)
 
             self.__Menu_fin.pack(pady = 100)
         
@@ -314,13 +314,13 @@ class Interface_Graphique:
             # mise en place du menu de fin pour les gagnants
             self.__Menu_fin = Frame(self.__window, background = "#FFFFFF", relief = "raised", width = 450, height = 350)
             self.__Menu_fin.pack_propagate(False)
-            Label(self.__Menu_fin, text = "Victoire", background = "#FFFFFF", font = ("Californian FB",25)).pack(pady = 30)
+            Label(self.__Menu_fin, text = "Victoire", background = "#FFFFFF", font = ("Californian FB", 25)).pack(pady = 30)
 
             self.__malogic.meilleur_score(self.__score) # renvoie du score du joueur pour l'afficher ou pas dans les meilleurs scores
 
 
             # boutons pour arrêter
-            Button(self.__Menu_fin, text = "Arrêtez", fg = "red", command = quit, font = ("Arial",10), width = 15, height = 2).pack(pady = 6)
+            Button(self.__Menu_fin, text = "Arrêtez", fg = "red", command = quit, font = ("Arial", 10), width = 15, height = 2).pack(pady = 6)
 
             self.__Menu_fin.pack(pady = 100)
 

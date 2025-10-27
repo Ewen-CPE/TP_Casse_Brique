@@ -32,7 +32,7 @@ class Brique:
         self.__brique = None
 
     def create_Briques(self):
-        '''fonction qui créer la raquette du joueur'''
+        '''fonction qui créer les briques pour le jeu'''
 
         indice = 0 # indique le numéro de la brique
 
@@ -50,29 +50,44 @@ class Brique:
     # Récupération de la position "x", de la position "y", de la vitesse "x", de la vitesse "y" et du diamètre
 
     def get_position_y(self,numero):
+        '''
+        entrée : numéro de la brique
+        sortie : position y du coin supérieur gauche de la brique
+        '''
         for j in range(len(self.__liste_brique)):
-            if self.__liste_brique[j][0] == numero :
-                return self.__liste_brique[j][2]
+            if self.__liste_brique[j][0] == numero : # On prends la brique qui correspond au numéro en argument
+                return self.__liste_brique[j][2] 
             
     def get_position_x(self,numero):
+        '''
+        entrée : numéro de la brique
+        sortie : position x du coin supérieur gauche de la brique
+        '''
         for j in range(len(self.__liste_brique)):
             if self.__liste_brique[j][0] == numero :
-                return self.__liste_brique[j][1]
+                return self.__liste_brique[j][1] 
             
     def get_taille_y(self):
+        '''sortie : taille y de la brique'''
         return self.__taille_y
     
     def get_taille_x(self):
+        '''sortie : taille x de la brique'''
         return self.__taille_x
     
     def get_taille_liste(self):
+        '''sortie : taille de la liste de briques'''
         return len(self.__liste_brique)
     
 
 
 
     def destruct_brique(self,numero):
-        '''Détruit une brique'''
+        '''
+        Détruit une brique
+        entrée : numéro de la brique
+        
+        '''
         self.__zone_jeu.delete(self.__liste_brique[numero][3])
         self.__liste_brique.remove(self.__liste_brique[numero])
         self.maj_indice()

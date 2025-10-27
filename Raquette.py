@@ -25,7 +25,7 @@ class Raquette:
     def create_raquette(self):
         '''fonction qui créer la raquette du joueur'''
 
-        self.__raquette = self.__zone_jeu.create_rectangle(self.__position_départ_x,self.__position_départ_y,self.__position_départ_x+self.__taille_x,self.__position_départ_y+self.__taille_y,fill = self.__couleur)
+        self.__raquette = self.__zone_jeu.create_rectangle(self.__position_départ_x, self.__position_départ_y, self.__position_départ_x + self.__taille_x, self.__position_départ_y + self.__taille_y, fill = self.__couleur)
 
     def clavier(self,event): 
         '''fonction qui gére l'attribution des touches pour déplacer la raquette'''
@@ -34,7 +34,7 @@ class Raquette:
 
         if self.__touche == "Left": # Déplacement à gauche de la raquette
             if self.__position_x <= 10 :
-                self.__position_x -=0
+                self.__position_x -= 0
             else:
                 self.__position_x -= 10 
 
@@ -44,7 +44,7 @@ class Raquette:
             else:
                 self.__position_x += 10
 
-        self.__zone_jeu.coords(self.__raquette,self.__position_x,self.__position_départ_y,self.__position_x + self.__taille_x,self.__position_départ_y + self.__taille_y) # Mise à jour des coordonnées de la raquette
+        self.__zone_jeu.coords(self.__raquette, self.__position_x, self.__position_départ_y, self.__position_x + self.__taille_x, self.__position_départ_y + self.__taille_y) # Mise à jour des coordonnées de la raquette
 
     def mouv_raquette(self):
         '''Récupération de la touche actionnée par le joueur et appel de la fonction de déplacement de la raquette'''
@@ -57,14 +57,18 @@ class Raquette:
     # Récupération de la position "x", de la position "y", de la taille "x" et de la taille "y"
 
     def get_position_x(self):
+        '''sortie : position x du coin supérieur gauche de la raquette'''
         return self.__position_x
     
     def get_position_y(self):
+        '''sortie : position y du coin supérieur gauche de la raquette'''
         return self.__position_départ_y
     
     def get_taille_x(self):
+        '''sortie : taille x de la raquette'''
         return self.__taille_x
     
     def get_taille_y(self):
+        '''sortie : taille y de la raquette'''
         return self.__taille_y
 

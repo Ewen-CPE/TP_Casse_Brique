@@ -44,18 +44,23 @@ class Logique:
 
 # "guetteur" de la classe logique pour accéder aux scores, aux vies et aux niveaux
     def get_score(self):
+        '''sortie : score du joueur'''
         return self.__score
     
     def get_vies(self):
+        '''sortie : vies du joueur'''
         return self.__vies
     
     def get_niveau(self):
+        '''sortie : niveau de jeu'''
         return self.__niveau[0] # premier élément car les niveaux sont compris dans une file
     
     def get_taille_liste_niveau(self):
+        '''sortie : taille de la file des niveaux'''
         return len(self.__niveau)
     
     def get_meilleur_score(self):
+        '''sortie : meilleur score'''
         with open("score.txt","r") as score_lu:
             score = score_lu.readlines() #lecture du fichier texte score.txt et extraction du contenue des lignes
 

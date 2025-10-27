@@ -47,25 +47,32 @@ class Balle:
     # Récupération de la position "x", de la position "y", de la vitesse "x", de la vitesse "y" et du diamètre
 
     def get_position_x(self):
+        '''sortie : position x du coin supérieur gauche de la balle'''
         return self.__position[0]
     
     def get_position_y(self):
+        '''sortie : position y du coin supérieur gauche de la balle'''
         return self.__position[1]
     
     def get_diametre(self):
+        '''sortie : diamètre de la balle'''
         return self.__diametre
     
     def get_vitesse_x(self):
+        '''sortie : nombres de pixels dont la balle se déplace par appel de la fonction mouv_balle en x donc sa vitesse en x'''
         return self.__vitesse_x
     
     def get_vitesse_y(self):
+        '''sortie : nombres de pixels dont la balle se déplace par appel de la fonction mouv_balle en y donc sa vitesse en y'''
         return self.__vitesse_y
     
     # Modification de la vitesse "x" et de la vitesse "y"
     def add_vitesse_y(self,vitesse_y):
+        '''entrée : vitesse y de la balle'''
         self.__vitesse_y = vitesse_y
 
     def add_vitesse_x(self,vitesse_x):
+        '''entrée : vitesse x de la balle'''
         self.__vitesse_x = vitesse_x
     
         
