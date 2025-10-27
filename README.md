@@ -14,7 +14,7 @@ Règle de notre casse brique :
 Nos spécificités :
 -Une fois toutes les briques détruites , le joueur accède au niveau 2 puis au niveau 3 avec le même principe de jeu. Les 3 niveaux ont des fond d’écran personnalisés. 
 -A chaque niveau , la vitesse de la balle augmente : pour le niveau 2, sa vitesse initiale est multipliée par 1,5 , pour le niveau 3 elle est multipliée par 2.
--Notre jeu possède un menu paramètre sur lequelle on peut choisir la couleur de la balle pour le jeu.
+-Notre jeu possède un menu paramètre dans lequel on peut choisir la couleur de la balle pour le jeu.
 -Nous avons un fichier texte qui garde les 3 derniers meilleurs scores.
  
 Adresse du répertoire GIT :
