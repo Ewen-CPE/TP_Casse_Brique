@@ -68,7 +68,7 @@ class Interface_Graphique:
         self.__window.mainloop()
     
     def parametre(self):
-        '''fonction pour l'aactivation du menu paramètre'''
+        '''fonction pour l'activation du menu paramètre'''
         self.__Menu.destroy()
 
         # initialisation du menu paramètre
