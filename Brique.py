@@ -40,8 +40,8 @@ class Brique:
 
         for _ in range(1,6):
             for _ in range(1,8):
-                self.__brique = self.__zone_jeu.create_rectangle(self.__position_départ_x,self.__position_départ_y,self.__position_départ_x+self.__taille_x,self.__position_départ_y+self.__taille_y,fill = self.__liste_couleur[rd.randint(0,6)]) # création d'une brique
-                self.__liste_brique.append([indice,self.__position_départ_x,self.__position_départ_y,self.__brique]) # ajout de la brique à la liste de brique avec son indice, sa position "x", sa position "y" et son canevas
+                self.__brique = self.__zone_jeu.create_rectangle(self.__position_départ_x, self.__position_départ_y, self.__position_départ_x + self.__taille_x, self.__position_départ_y + self.__taille_y, fill = self.__liste_couleur[rd.randint(0,6)]) # création d'une brique
+                self.__liste_brique.append([indice, self.__position_départ_x, self.__position_départ_y, self.__brique]) # ajout de la brique à la liste de brique avec son indice, sa position "x", sa position "y" et son canevas
                 indice += 1
                 self.__position_départ_x += self.__taille_x + self.__espacement_x # met à jour la position "x" pour la prochaine brique (largeur + espacement)
             self.__position_départ_x = 10 # position de départ pour la prochaine ligne de brique
